@@ -15,7 +15,9 @@
 
 <!-- 基礎・実装・発展のどれか1つに取り組めば完了です。 -->
 
-- 取り組んだレベル：基礎 / 実装 / 発展
-- やったこと：
-- 結果：
+- 取り組んだレベル：基礎
+- やったこと：Added `server.tool()(tools.get_lecture_summary)` to app/mcp_server.py only. No changes to mcp_servers.json or mcp_agent.py.
+- 結果：--list-tools showed 8 tools including glossary_get_lecture_summary. For "第2回では何を学びますか？" the trace showed [tool call] glossary_get_lecture_summary({'lecture': 2}) and the answer matched the Session 2 summary (fine-tuning and LoRA). pytest: 21 passed.
 - 気づき・疑問：
+  - The agent fetches the tool list from the server on every startup, so adding a tool on the server side is enough. The agent needs no changes.
+  - The docstring became the tool description and the type hint (int) became the argument schema, so the model converted "第2回" into the integer 2. Writing a clear docstring is effectively prompt engineering for tools.
